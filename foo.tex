@@ -1,0 +1,54 @@
+\usemodule[zhfonts]
+\definecolor[ShadeBlue][r=.525,g=.588,b=.655]
+\setevariables[cv][linethickness=4pt,linecolor=ShadeBlue]
+\setvariables[cvtitle][style=\bfc]
+\setvariables[cvsubject][style=\bfa]
+\definecolor[ShadeRed][r=.588,g=.329,b=.329]
+\setvariables
+  [cvsubject]
+  [bottomlinethickness=4pt,
+   splitlinethickness=1pt,
+   bottomlinecolor=ShadeRed]
+\setuplayout[backspace=.075\paperwidth,
+             width=\dimexpr\paperwidth-2\backspace\relax,
+             topspace=\backspace,header=0cm,footer=0cm,
+             height=\dimexpr\paperheight -2\topspace\relax]
+\setuppagenumbering[alternative=singlesided,location=]
+\setupheads[indentnext=yes]
+\setuphead[title,subject][before={\blank[halfline]},after={\blank[halfline]}]
+\setuphead[title][style=\getvariable{cvtitle}{style}]
+\setuphead[subject][style=\getvariable{cvsubject}{style}]
+\define[1]\setsubjectwidth{%
+  \setbox0\hbox{\getvariable{cvsubject}{style} #1}%
+  \setvariables[cvsubject][width=\the\wd0]%
+}
+\setuphead[subject][command=\subjectCMD]
+\define[2]\subjectCMD{%
+  \setsubjectwidth{#2}\cvframed{#2}%
+}
+\defineframed
+  [cvframed]
+  [width=\textwidth,frame=ff,align={flushleft,lohi},background=BottomLines]
+\defineoverlay[BottomLines][\useMPgraphic{BottomLines}]
+\startuseMPgraphic{BottomLines}
+numeric thi, w; color linecolor;
+thi := \getvariable{cvsubject}{bottomlinethickness};
+w := \getvariable{cvsubject}{width};
+linecolor := \MPcolor{\getvariable{cvsubject}{bottomlinecolor}};
+% 画底线
+path bottomline;
+bottomline := (.5thi, 0) -- (w, 0);
+draw bottomline withpen pencircle scaled thi withcolor transparent(1, .5, linecolor);
+% 画版心贯穿线
+path splitline;
+splitline := (0, 0) -- (OverlayWidth, 0);
+thi := \getvariable{cvsubject}{splitlinethickness};
+draw splitline withpen pencircle scaled thi withcolor linecolor;
+draw (0, OverlayHeight - .5thi) withcolor background;
+\stopuseMPgraphic
+\startTEXpage[width=10cm,offset=5mm]
+\title{某某人}
+... ... ...
+\subject{能吞下玻璃}
+... ... ...
+\stopTEXpage

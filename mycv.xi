@@ -56,7 +56,7 @@ draw (PaperWidth, PaperHeight) withcolor background;
 @ 画出版心顶线 #
 numeric linethickness; color linecolor;
 linethickness := \getvariable{cv}{linethickness};
-linecolor := \getvariable{cv}{linecolor};
+linecolor := \MPcolor{\getvariable{cv}{linecolor}};
 pair a, b;
 a := (BackSpace, PaperHeight - .5TopSpace);
 b := (BackSpace + TextWidth, ypart a);
@@ -66,10 +66,11 @@ draw a -- b withpen pencircle scaled linethickness withcolor linecolor;
 \noindent 线条的粗度和颜色，是 \CONTEXT\ 层面里自定义的变量：
 
 @ 简历参数 #
-\setvariables[cv][linethickness=2pt,linecolor=darkblue]
+\definecolor[ShadeBlue][r=.525,g=.588,b=.655]
+\setevariables[cv][linethickness=4pt,linecolor=ShadeBlue]
 @
 
-\noindent 我们在 \CONTEXT\ 排版环境里使用 \METAPOST\ 画图，实际上这两个环境是通过 \METAFUN\ 连接的，故而可以在 \METAPOST\ 代码里直接使用 \TEX/\CONTEXT\ 宏。\CONTEXT\ 编译器在遇到混有 \TEX/\CONTEXT\ 宏的 \METAPOST\ 代码时，会先展开这些宏，然后再编译 \METAPOST\ 代码。
+\noindent 我们在 \CONTEXT\ 排版环境里使用 \METAPOST\ 画图，实际上这两个环境是通过 \METAFUN\ 连接的，故而可以在 \METAPOST\ 代码里直接使用 \TEX/\CONTEXT\ 宏。\CONTEXT\ 编译器在遇到混有 \TEX/\CONTEXT\ 宏的 \METAPOST\ 代码时，会先展开这些宏，然后再编译 \METAPOST\ 代码。需要注意的是，\CONTEXT\ 层面的尺寸变量，在 \METAPOST\ 层面可以直接用 \tex{getvariable} 获取，但颜色值需要用 \tex{MPcolor} 转换，否则得到的只是颜色名，而 \METAPOST\ 层面并不知道该颜色名对应的颜色值是什么。
 
 按照版心顶线的画法，画出版心底线：
 
@@ -91,7 +92,7 @@ fi;
 
 \noindent 版心底线有两种。若简历只有 1 页，底线只是一条直线。若简历是多页，底线是一条中部有所跳跃的直线，跳跃区域含有页码。
 
-\noindent 将上述 \METAPOST\ 代码置于 \type{useMPgraphic} 环境，然后通过 overlay 机制使之成为页面背景：
+将上述 \METAPOST\ 代码置于 \type{useMPgraphic} 环境，然后通过 overlay 机制使之成为页面背景：
 
 @ 简历页面背景 #
 \startuseMPgraphic{cvbackground}
@@ -126,7 +127,7 @@ fi;
 
 以下示例测试了多页情况，结果见图 \in[bg-test] 右 2 和 右 3。
 
-@ 简历页面背景测试 2 #
+@ 多页简历背景测试 #
 # 简历页面背景测试环境 @
 \starttext
 \midaligned{第一页}
@@ -166,7 +167,8 @@ fi;
 @ 小节标题盒子 #
 \defineframed
   [cvframed]
-  [width=\textwidth,frame=ff,align={flushleft,lohi},background=BottomLines]
+  [width=\textwidth,frame=off,boffset=2pt,
+   align={flushleft,lohi},background=BottomLines]
 @
 
 \noindent \type{BottomLines} 是 overlay 的名字，该 overlay 是同样名为 \type{BottomLines} 的 \METAPOST\ 图形：
@@ -181,7 +183,7 @@ fi;
 numeric thi, w; color linecolor;
 thi := \getvariable{cvsubject}{bottomlinethickness};
 w := \getvariable{cvsubject}{width};
-linecolor := \getvariable{cvsubject}{bottomlinecolor};
+linecolor := \MPcolor{\getvariable{cvsubject}{bottomlinecolor}};
 % 画底线
 path bottomline;
 bottomline := (.5thi, 0) -- (w, 0);
@@ -189,7 +191,8 @@ draw bottomline withpen pencircle scaled thi withcolor transparent(1, .5, lineco
 % 画版心贯穿线
 path splitline;
 splitline := (0, 0) -- (OverlayWidth, 0);
-draw splitline withpen pencircle scaled 1pt withcolor linecolor;
+thi := \getvariable{cvsubject}{splitlinethickness};
+draw splitline withpen pencircle scaled thi withcolor linecolor;
 @
 
 \noindent 注意，\type{bottomline} 的起点，其 $x$ 坐标向右有所偏移，这是在做线宽补偿。若 overlay 为 \METAPOST\ 图形，\CONTEXT\ 会将图形中心与 overlay 区域的中心对准，然后以 overlay 边框裁剪图形，而 \METAPOST\ 图形中的线条加粗后，加粗部分会导致图形尺寸有所溢出，从而被 overlay 边框裁掉，所以在画线时，要注意对线宽予以补偿。同理，以隐形辅助点限定图形空间时，也要考虑线宽补偿，亦即
@@ -206,10 +209,13 @@ draw (0, OverlayHeight - .5thi) withcolor background;
 \stopuseMPgraphic
 @
 
-底线的粗度和颜色，可以作为简历参数的一部分，其默认值如下：
+底线的粗度和颜色以及分割线的粗度，可以作为简历参数的一部分，其默认值如下：
 
 @ 简历参数 # +
-\setvariables[cvsubject][bottomlinethickness=4pt,bottomlinecolor=darkblue]
+\definecolor[ShadeRed][r=.588,g=.329,b=.329]
+\setvariables
+  [cvsubject]
+  [bottomlinethickness=6pt,bottomlinecolor=ShadeRed,splitlinethickness=2pt]
 @
 
 \noindent 但是小节标题内容的宽度值需要基于小节标题样式中设定的字号，并基于 \TEX\ 盒子的宽度方可得到，将该过程定义为 \CONTEXT\ 宏：
@@ -359,7 +365,7 @@ drawarrow (0, 0) -- (5mm, 0) withpen pencircle;
 numeric u; path p; color squarecolor;
 u := BodyFontSize;
 p := fullsquare scaled .625u;
-squarecolor := \getvariable{cvlist}{color};
+squarecolor := \MPcolor{\getvariable{cvlist}{color}};
 fill p shifted (.2u, -.2u) withcolor darkgray;
 fill p withcolor squarecolor;
 \stopuseMPgraphic
@@ -368,7 +374,7 @@ fill p withcolor squarecolor;
 \noindent 列表项符号的颜色默认值设定如下：
 
 @ 简历样式 # +
-\setvariables[cvlist][color=darkred]
+\setvariables[cvlist][color=ShadeRed]
 @
 
 以下代码用于测试列表样式，结果见图 \in[list-test]。
@@ -400,21 +406,26 @@ numeric f;
 f := (bbwidth photo) / (bbheight photo);
 photo := photo xysized (3.5cm, 3.5cm / f);
 % 裁剪为圆形区域
-clip photo to unitcircle scaled 3.5cm;
+path shape; color shapecolor;
+shape := unitcircle scaled 3.5cm;
+shapecolor := \MPcolor{\getvariable{photo}{shapecolor}};
+clip photo to shape;
 % 照片定位，需要试探几次，方能找到合适位置
-pair photolocation;
-photolocation := (\getvariable{photo}{x}, \getvariable{photo}{y});
-photo := photo shifted photolocation;
+pair location;
+location := (\getvariable{photo}{x}, \getvariable{photo}{y});
+photo := photo shifted location;
+shape := shape shifted location;
 % 只在首页显示照片
 if \number\userpagenumber = 1:
     draw photo;
+    draw shape withpen pencircle scaled 2pt withcolor shapecolor;
 fi;
 @
 
 经过一些试探，我将照片默认的位置定义为
 
 @ 简历样式 # +
-\setvariables[photo][x=16cm,y=24.25cm]
+\setvariables[photo][x=16cm,y=24.25cm,shapecolor=ShadeRed]
 @
 
 \section{模板}

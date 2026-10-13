@@ -1,9 +1,13 @@
 \startenvironment octcv
 \usemodule[zhfonts]
-\setvariables[cv][linethickness=2pt,linecolor=darkblue]
+\definecolor[ShadeBlue][r=.525,g=.588,b=.655]
+\setevariables[cv][linethickness=4pt,linecolor=ShadeBlue]
 \setvariables[cvtitle][style=\bfc]
 \setvariables[cvsubject][style=\bfa]
-\setvariables[cvsubject][bottomlinethickness=4pt,bottomlinecolor=darkblue]
+\definecolor[ShadeRed][r=.588,g=.329,b=.329]
+\setvariables
+  [cvsubject]
+  [bottomlinethickness=6pt,bottomlinecolor=ShadeRed,splitlinethickness=2pt]
 \setuplayout[backspace=.075\paperwidth,
              width=\dimexpr\paperwidth-2\backspace\relax,
              topspace=\backspace,header=0cm,footer=0cm,
@@ -58,18 +62,18 @@ drawarrow (0, 0) -- (5mm, 0) withpen pencircle;
 numeric u; path p; color squarecolor;
 u := BodyFontSize;
 p := fullsquare scaled .625u;
-squarecolor := \getvariable{cvlist}{color};
+squarecolor := \MPcolor{\getvariable{cvlist}{color}};
 fill p shifted (.2u, -.2u) withcolor darkgray;
 fill p withcolor squarecolor;
 \stopuseMPgraphic
-\setvariables[cvlist][color=darkred]
-\setvariables[photo][x=16cm,y=24.25cm]
+\setvariables[cvlist][color=ShadeRed]
+\setvariables[photo][x=16cm,y=24.25cm,shapecolor=ShadeRed]
 \startuseMPgraphic{cvbackground}
 draw (0, 0) withcolor background;
 draw (PaperWidth, PaperHeight) withcolor background;
 numeric linethickness; color linecolor;
 linethickness := \getvariable{cv}{linethickness};
-linecolor := \getvariable{cv}{linecolor};
+linecolor := \MPcolor{\getvariable{cv}{linecolor}};
 pair a, b;
 a := (BackSpace, PaperHeight - .5TopSpace);
 b := (BackSpace + TextWidth, ypart a);
@@ -95,27 +99,33 @@ numeric f;
 f := (bbwidth photo) / (bbheight photo);
 photo := photo xysized (3.5cm, 3.5cm / f);
 % 裁剪为圆形区域
-clip photo to unitcircle scaled 3.5cm;
+path shape; color shapecolor;
+shape := unitcircle scaled 3.5cm;
+shapecolor := \MPcolor{\getvariable{photo}{shapecolor}};
+clip photo to shape;
 % 照片定位，需要试探几次，方能找到合适位置
-pair photolocation;
-photolocation := (\getvariable{photo}{x}, \getvariable{photo}{y});
-photo := photo shifted photolocation;
+pair location;
+location := (\getvariable{photo}{x}, \getvariable{photo}{y});
+photo := photo shifted location;
+shape := shape shifted location;
 % 只在首页显示照片
 if \number\userpagenumber = 1:
     draw photo;
+    draw shape withpen pencircle scaled 2pt withcolor shapecolor;
 fi;
 \stopuseMPgraphic
 \defineoverlay[cvbackground][\useMPgraphic{cvbackground}]
 \setupbackgrounds[page][background=cvbackground]
 \defineframed
   [cvframed]
-  [width=\textwidth,frame=ff,align={flushleft,lohi},background=BottomLines]
+  [width=\textwidth,frame=off,boffset=2pt,
+   align={flushleft,lohi},background=BottomLines]
 \defineoverlay[BottomLines][\useMPgraphic{BottomLines}]
 \startuseMPgraphic{BottomLines}
 numeric thi, w; color linecolor;
 thi := \getvariable{cvsubject}{bottomlinethickness};
 w := \getvariable{cvsubject}{width};
-linecolor := \getvariable{cvsubject}{bottomlinecolor};
+linecolor := \MPcolor{\getvariable{cvsubject}{bottomlinecolor}};
 % 画底线
 path bottomline;
 bottomline := (.5thi, 0) -- (w, 0);
@@ -123,7 +133,8 @@ draw bottomline withpen pencircle scaled thi withcolor transparent(1, .5, lineco
 % 画版心贯穿线
 path splitline;
 splitline := (0, 0) -- (OverlayWidth, 0);
-draw splitline withpen pencircle scaled 1pt withcolor linecolor;
+thi := \getvariable{cvsubject}{splitlinethickness};
+draw splitline withpen pencircle scaled thi withcolor linecolor;
 draw (0, OverlayHeight - .5thi) withcolor background;
 \stopuseMPgraphic
 \stopenvironment
