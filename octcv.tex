@@ -1,13 +1,12 @@
 \startenvironment octcv
 \usemodule[zhfonts]
-\definecolor[ShadeBlue][r=.525,g=.588,b=.655]
-\setevariables[cv][linethickness=4pt,linecolor=ShadeBlue]
+\definecolor[CharmRed][r=.7,g=.4,b=.4]
+\setevariables[cv][linethickness=4pt,linecolor=CharmRed]
 \setvariables[cvtitle][style=\bfc]
 \setvariables[cvsubject][style=\bfa]
-\definecolor[ShadeRed][r=.588,g=.329,b=.329]
 \setvariables
   [cvsubject]
-  [bottomlinethickness=6pt,bottomlinecolor=ShadeRed,splitlinethickness=2pt]
+  [bottomlinethickness=6pt,bottomlinecolor=CharmRed,splitlinethickness=2pt]
 \setuplayout[backspace=.075\paperwidth,
              width=\dimexpr\paperwidth-2\backspace\relax,
              topspace=\backspace,header=0cm,footer=0cm,
@@ -66,8 +65,8 @@ squarecolor := \MPcolor{\getvariable{cvlist}{color}};
 fill p shifted (.2u, -.2u) withcolor darkgray;
 fill p withcolor squarecolor;
 \stopuseMPgraphic
-\setvariables[cvlist][color=ShadeRed]
-\setvariables[photo][x=16cm,y=24.25cm,shapecolor=ShadeRed]
+\setvariables[cvlist][color=CharmRed]
+\setvariables[photo][x=16cm,y=24.25cm,shapecolor=CharmRed]
 \startuseMPgraphic{cvbackground}
 draw (0, 0) withcolor background;
 draw (PaperWidth, PaperHeight) withcolor background;

@@ -66,8 +66,8 @@ draw a -- b withpen pencircle scaled linethickness withcolor linecolor;
 \noindent 线条的粗度和颜色，是 \CONTEXT\ 层面里自定义的变量：
 
 @ 简历参数 #
-\definecolor[ShadeBlue][r=.525,g=.588,b=.655]
-\setevariables[cv][linethickness=4pt,linecolor=ShadeBlue]
+\definecolor[CharmRed][r=.7,g=.4,b=.4]
+\setevariables[cv][linethickness=4pt,linecolor=CharmRed]
 @
 
 \noindent 我们在 \CONTEXT\ 排版环境里使用 \METAPOST\ 画图，实际上这两个环境是通过 \METAFUN\ 连接的，故而可以在 \METAPOST\ 代码里直接使用 \TEX/\CONTEXT\ 宏。\CONTEXT\ 编译器在遇到混有 \TEX/\CONTEXT\ 宏的 \METAPOST\ 代码时，会先展开这些宏，然后再编译 \METAPOST\ 代码。需要注意的是，\CONTEXT\ 层面的尺寸变量，在 \METAPOST\ 层面可以直接用 \tex{getvariable} 获取，但颜色值需要用 \tex{MPcolor} 转换，否则得到的只是颜色名，而 \METAPOST\ 层面并不知道该颜色名对应的颜色值是什么。
@@ -212,10 +212,9 @@ draw (0, OverlayHeight - .5thi) withcolor background;
 底线的粗度和颜色以及分割线的粗度，可以作为简历参数的一部分，其默认值如下：
 
 @ 简历参数 # +
-\definecolor[ShadeRed][r=.588,g=.329,b=.329]
 \setvariables
   [cvsubject]
-  [bottomlinethickness=6pt,bottomlinecolor=ShadeRed,splitlinethickness=2pt]
+  [bottomlinethickness=6pt,bottomlinecolor=CharmRed,splitlinethickness=2pt]
 @
 
 \noindent 但是小节标题内容的宽度值需要基于小节标题样式中设定的字号，并基于 \TEX\ 盒子的宽度方可得到，将该过程定义为 \CONTEXT\ 宏：
@@ -374,7 +373,7 @@ fill p withcolor squarecolor;
 \noindent 列表项符号的颜色默认值设定如下：
 
 @ 简历样式 # +
-\setvariables[cvlist][color=ShadeRed]
+\setvariables[cvlist][color=CharmRed]
 @
 
 以下代码用于测试列表样式，结果见图 \in[list-test]。
@@ -397,7 +396,7 @@ fill p withcolor squarecolor;
 
 个人照片放在简历的压轴环节，但实际上它是简历背景的一部分。照片也放在 icons 目录。在个人基本信息区域，我已在其右侧留出了足够的空区，可以用于放照片。以下代码载入照片，将其裁剪为圆形，放在一个合适的位置上。这个位置需要经过一些试探方可确定，我将其开放为简历参数。
 
-@ 背景里的其他元素 #
+@ 背景里的其他元素 # [typing]
 % 载入照片
 picture photo;
 photo := externalfigure "icons/photo.png";
@@ -425,7 +424,7 @@ fi;
 经过一些试探，我将照片默认的位置定义为
 
 @ 简历样式 # +
-\setvariables[photo][x=16cm,y=24.25cm,shapecolor=ShadeRed]
+\setvariables[photo][x=16cm,y=24.25cm,shapecolor=CharmRed]
 @
 
 \section{模板}

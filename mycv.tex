@@ -71,8 +71,8 @@ draw a -- b withpen pencircle scaled linethickness withcolor linecolor;
 
 \starttyping
 /BTEX\color[darkred]{@}/ETEX/BTEX\type[color=darkred]{ 简历参数 }/ETEX/BTEX\color[darkred]{\#}/ETEX/BTEX\reference[xi-5]{5}\inoutermargin{\darkred{5}}/ETEX
-\definecolor[ShadeBlue][r=.525,g=.588,b=.655]
-\setevariables[cv][linethickness=4pt,linecolor=ShadeBlue]
+\definecolor[CharmRed][r=.7,g=.4,b=.4]
+\setevariables[cv][linethickness=4pt,linecolor=CharmRed]
 \stoptyping
 
 \noindent 我们在 \CONTEXT\ 排版环境里使用 \METAPOST\ 画图，实际上这两个环境是通过 \METAFUN\ 连接的，故而可以在 \METAPOST\ 代码里直接使用 \TEX/\CONTEXT\ 宏。\CONTEXT\ 编译器在遇到混有 \TEX/\CONTEXT\ 宏的 \METAPOST\ 代码时，会先展开这些宏，然后再编译 \METAPOST\ 代码。需要注意的是，\CONTEXT\ 层面的尺寸变量，在 \METAPOST\ 层面可以直接用 \tex{getvariable} 获取，但颜色值需要用 \tex{MPcolor} 转换，否则得到的只是颜色名，而 \METAPOST\ 层面并不知道该颜色名对应的颜色值是什么。
@@ -230,10 +230,9 @@ draw (0, OverlayHeight - .5thi) withcolor background;
 
 \starttyping
 /BTEX\color[darkred]{@}/ETEX/BTEX\type[color=darkred]{ 简历参数 }/ETEX/BTEX\color[darkred]{\#}/ETEX/BTEX\reference[xi-18]{18}\inoutermargin{\darkred{18}}/ETEX/BTEX\ \color[darkgreen]{\bf $+$}\ /ETEX
-\definecolor[ShadeRed][r=.588,g=.329,b=.329]
 \setvariables
   [cvsubject]
-  [bottomlinethickness=6pt,bottomlinecolor=ShadeRed,splitlinethickness=2pt]
+  [bottomlinethickness=6pt,bottomlinecolor=CharmRed,splitlinethickness=2pt]
 \stoptyping
 
 \noindent 但是小节标题内容的宽度值需要基于小节标题样式中设定的字号，并基于 \TEX\ 盒子的宽度方可得到，将该过程定义为 \CONTEXT\ 宏：
@@ -404,7 +403,7 @@ fill p withcolor squarecolor;
 
 \starttyping
 /BTEX\color[darkred]{@}/ETEX/BTEX\type[color=darkred]{ 简历样式 }/ETEX/BTEX\color[darkred]{\#}/ETEX/BTEX\reference[xi-30]{30}\inoutermargin{\darkred{30}}/ETEX/BTEX\ \color[darkgreen]{\bf $+$}\ /ETEX
-\setvariables[cvlist][color=ShadeRed]
+\setvariables[cvlist][color=CharmRed]
 \stoptyping
 
 以下代码用于测试列表样式，结果见图 \in[list-test]。
@@ -458,7 +457,7 @@ fi;
 
 \starttyping
 /BTEX\color[darkred]{@}/ETEX/BTEX\type[color=darkred]{ 简历样式 }/ETEX/BTEX\color[darkred]{\#}/ETEX/BTEX\reference[xi-33]{33}\inoutermargin{\darkred{33}}/ETEX/BTEX\ \color[darkgreen]{\bf $+$}\ /ETEX
-\setvariables[photo][x=16cm,y=24.25cm,shapecolor=ShadeRed]
+\setvariables[photo][x=16cm,y=24.25cm,shapecolor=CharmRed]
 \stoptyping
 
 \section{模板}
