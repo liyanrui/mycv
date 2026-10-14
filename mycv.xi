@@ -17,7 +17,7 @@
 
 有人认为，唯有我好好写一份简历，投给某个将军，参与他们的战争，兴许能获得我本该具备的价值。若对方真的是个将军，我会欣然而往，可是若对方是个奴隶主呢？我的简历，兴许是一纸卖身契，而且还要看人家是否愿意买。不过，我总得尝试一下。这意味着，我又要进入一场战争了，用 \CONTEXT\ 写一份简历，依然是以文学编程的方式，而我的房间也将再次混乱。
 
-这是我第二次写简历。上一次写简历，还是公元 2004 年本科毕业前的春天。前几天，刘欢死了。大家在讨论他当年唱的那首「从头再来」。我并不知道我有没有从头再来的能力和机会。李白说，天生我材必有用，可他中年失业后，一直穷困潦倒。我拿他当预防针吧。君子见机，达人知命。
+这是我第二次写简历。上一次写简历，还是公元 2004 年本科毕业前的春天。前几天，刘欢死了。大家在讨论他当年唱的那首「从头再来」。我并不知道我有没有从头再来的能力和机会。李白说，天生我材必有用，可他中年失业后，一直穷困潦倒。我拿他当预防针吧，君子见机，达人知命。
 
 \section{页面布局}
 
@@ -30,28 +30,26 @@
              height=\dimexpr\paperheight -2\topspace\relax]
 @
 
-\noindent 上述代码将订口尺寸设为 0.075 倍的纸张宽度，版心宽度是纸张宽度减去 2 倍订口尺寸，这也意味着翻口尺寸与订口尺寸相等。天头（header）和地脚（footer）的尺寸也等于订口。注意，width 是版心宽度，但 \type{height} 却并非版心高度，而是版心高度加上页眉（header）与页脚（footer）的高度，故而后两者尺寸设为 0。此外，还需要注意，\type{\dimexpr ...\relax} 是 LuaMeta\TEX\ 引擎支持的原语，可直接基于 \TEX\ 宏或寄存器完成加减乘除等运算。
+\noindent 上述代码将订口尺寸设为 0.075 倍的纸张宽度，版心宽度是纸张宽度减去 2 倍订口尺寸。注意，width 是版心宽度，但 \type{height} 却并非版心高度，而是版心高度加上页眉（header）与页脚（footer）的高度，故而后两者尺寸设为 0，使得版心高度是纸张宽度减去 2 倍订口尺寸，于是版心四周留出的空白皆为订口尺寸。还需要注意，\type{\dimexpr ...\relax} 是 LuaMeta\TEX\ 引擎支持的原语，可直接基于 \TEX\ 宏或寄存器完成加减乘除等运算。
 
-文档需要设为单面模式，并消除默认页码：
+文档需要设为单面模式，并为了作更具个性化的页码而消除默认页码：
 
 @ 简历样式 # +
 \setuppagenumbering[alternative=singlesided,location=]
 @
 
-\noindent 之所以消除默认页码，是因为后续要制作更具个性化的页码。
-
 \section{背景}
 
-我想在简历的页眉和页脚区域各画两条线，一方面用于装饰，另一方面用于标记版心区域同时也能用于呈现某些信息，例如页码。虽然在上一节所作的页面布局设定中，页眉和页脚区域皆设为 0，但是我们可以用 MetaPost 画出与纸张同样尺寸的图形，并将其作为页面背景，这意味着在背景的任何一处，皆能画出我们所需要的内容，亦即没有页眉和页脚区域，我们也能在背景里构造出它们来。
+在简历的页眉和页脚区域各画两条线，一方面用于装饰，另一方面用于标记版心区域且呈现页码。在上一节所作的页面布局设定中，虽然页眉和页脚区域皆设为 0，但可以用 MetaPost 画出与纸张同样尺寸的图形，并将其作为页面背景，这意味着在背景的任何一处，皆能画出我们所需要的内容，亦即没有页眉和页脚区域，也能在背景里构造出它们来。
 
-首先，需要先用 \METAPOST\ 的背景色画出两个点，用于固定背景尺寸，使之与纸张尺寸相同，从而构造出背景空间，其坐标原点是背景或页面的左下角点。
+首先，用 \METAPOST\ 的背景色画出两个点，以固定背景尺寸，使之与纸张尺寸相同，从而构造背景空间，其坐标原点是背景或页面的左下角点。
 
 @ 构造背景空间 #
 draw (0, 0) withcolor background;
 draw (PaperWidth, PaperHeight) withcolor background;
 @
 
-在页面空间里，寻找版心的顶边位置，在该位置画一条直线：
+在页面空间里，寻找版心顶部空间的纵向正中，在该位置画一条直线：
 
 @ 画出版心顶线 #
 numeric linethickness; color linecolor;
@@ -63,14 +61,14 @@ b := (BackSpace + TextWidth, ypart a);
 draw a -- b withpen pencircle scaled linethickness withcolor linecolor;
 @
 
-\noindent 线条的粗度和颜色，是 \CONTEXT\ 层面里自定义的变量：
+\noindent 所画线条的粗度和颜色，是 \CONTEXT\ 层面里自定义的变量：
 
 @ 简历参数 #
 \definecolor[CharmRed][r=.7,g=.4,b=.4]
 \setevariables[cv][linethickness=4pt,linecolor=CharmRed]
 @
 
-\noindent 我们在 \CONTEXT\ 排版环境里使用 \METAPOST\ 画图，实际上这两个环境是通过 \METAFUN\ 连接的，故而可以在 \METAPOST\ 代码里直接使用 \TEX/\CONTEXT\ 宏。\CONTEXT\ 编译器在遇到混有 \TEX/\CONTEXT\ 宏的 \METAPOST\ 代码时，会先展开这些宏，然后再编译 \METAPOST\ 代码。需要注意的是，\CONTEXT\ 层面的尺寸变量，在 \METAPOST\ 层面可以直接用 \tex{getvariable} 获取，但颜色值需要用 \tex{MPcolor} 转换，否则得到的只是颜色名，而 \METAPOST\ 层面并不知道该颜色名对应的颜色值是什么。
+\noindent 在 \CONTEXT\ 排版环境里使用 \METAPOST\ 画图，\METAFUN\ 负责沟通二者，故而可在 \METAPOST\ 代码里直接使用 \TEX/\CONTEXT\ 宏。\CONTEXT\ 编译器在遇到混有 \TEX/\CONTEXT\ 宏的 \METAPOST\ 代码时，会先展开 \CONTEXT\ 宏，然后再编译 \METAPOST\ 代码。需要注意的是，在 \CONTEXT\ 层面设定的尺寸变量，在 \METAPOST\ 层面可直接用 \tex{getvariable} 获取，但颜色值需要用 \tex{MPcolor} 转换，否则 \METAPOST\ 层面得到了颜色名但不知其对应的颜色值是什么。
 
 按照版心顶线的画法，画出版心底线：
 
@@ -92,7 +90,7 @@ fi;
 
 \noindent 版心底线有两种。若简历只有 1 页，底线只是一条直线。若简历是多页，底线是一条中部有所跳跃的直线，跳跃区域含有页码。
 
-将上述 \METAPOST\ 代码置于 \type{useMPgraphic} 环境，然后通过 overlay 机制使之成为页面背景：
+将上述 \METAPOST\ 代码置于 \type{useMPgraphic} 环境，借助 overlay 机制可使之成为页面背景：
 
 @ 简历页面背景 #
 \startuseMPgraphic{cvbackground}
@@ -105,7 +103,7 @@ fi;
 \setupbackgrounds[page][background=cvbackground]
 @
 
-以下是为了测试简历背景效果而构造的环境，虽然简历的纸张尺寸通常是 A4，但是为了在此展示上述代码构造的页面背景效果，我使用了 A8。
+以下代码用于测试简历背景效果而构造的环境，虽然简历的纸张尺寸通常是 A4，但是为了在此展示上述代码构造的页面背景效果，我使用了 A8。
 
 @ 简历页面背景测试环境 #
 \usemodule[zhfonts]
@@ -136,7 +134,7 @@ fi;
 \stoptext
 @
 
-\placefigure[here][bg-test]{多页背景测试}{
+\placefigure[here][bg-test]{多页简历背景测试}{
   \startfloatcombination[nx=3,ny=1]
   \placefigure[nonumber]{单页}{\externalfigure[test/01.pdf][frame=on]}
   \placefigure[nonumber]{多页 1}{\externalfigure[test/02.pdf][page=1,frame=on]}
@@ -304,6 +302,57 @@ draw (0, OverlayHeight - .5thi) withcolor background;
 @
 \placefigure[here][basic-info]{个人基本信息}{\externalfigure[test/04.pdf]}
 
+\section{照片}
+
+个人照片是简历背景的一部分。照片也放在 icons 目录。在个人基本信息区域，我已在其右侧留出了足够的空区，可用于放照片。以下代码载入照片，将其裁剪为圆形，放在一个合适的位置上，该位置作为简历参数的一部分。
+
+@ 背景里的其他元素 #
+% 载入照片
+picture photo; photo := externalfigure "icons/photo.png";
+% 确定照片尺寸
+numeric f; f := (bbwidth photo) / (bbheight photo);
+photo := photo xysized (3.5cm, 3.5cm / f);
+% 裁剪为圆形区域
+path shape; color shapecolor;
+shape := unitcircle scaled 3.5cm;
+shapecolor := \MPcolor{\getvariable{photo}{shapecolor}};
+clip photo to shape;
+% 照片定位，需要试探几次，方能找到合适位置
+pair location;
+location := (\getvariable{photo}{x}, \getvariable{photo}{y});
+photo := photo shifted location; shape := shape shifted location;
+% 只在首页显示照片
+if \number\userpagenumber = 1:
+    draw photo;
+    draw shape withpen pencircle scaled 2pt withcolor shapecolor;
+fi;
+@
+
+以下代码用于测试照片能否正常显示，结果见图 \in[photo-test]。
+
+@ 带照片的多页简历 # [typing]
+# 简历页面背景测试环境 @
+\setvariables[photo][x=1cm,y=2cm,shapecolor=CharmRed]
+\starttext
+\midaligned{第一页}\page\midaligned{第二页}
+\stoptext
+@
+
+\placefigure[here][photo-test]{带照片的多页简历测试}{
+  \startfloatcombination[nx=2,ny=1]
+  \placefigure[nonumber]{多页 1}{\externalfigure[test/photo.pdf][height=5cm,page=1,frame=on]}
+  \placefigure[nonumber]{多页 2}{\externalfigure[test/photo.pdf][height=5cm,page=2,frame=on]}
+  \stopfloatcombination
+}
+
+\indentation 照片的位置需要经过一些试探方可确定，在 A4 纸上，可将其设为
+
+@ 简历样式 # +
+\setvariables[photo][x=16cm,y=24.25cm,shapecolor=CharmRed]
+@
+
+\noindent 如此可将照片放于页面右上方。
+
 \section{时间节点}
 
 无论是教育背景，还是工作经历，需要由一些时间节点构成，以单行四列的表格形式排版这部分内容，且内容以粗体呈现：
@@ -392,41 +441,6 @@ fill p withcolor squarecolor;
 @
 \placefigure[here][list-test]{列表样式测试}{\externalfigure[test/06.pdf]}
 
-\section{照片}
-
-个人照片放在简历的压轴环节，但实际上它是简历背景的一部分。照片也放在 icons 目录。在个人基本信息区域，我已在其右侧留出了足够的空区，可以用于放照片。以下代码载入照片，将其裁剪为圆形，放在一个合适的位置上。这个位置需要经过一些试探方可确定，我将其开放为简历参数。
-
-@ 背景里的其他元素 # [typing]
-% 载入照片
-picture photo;
-photo := externalfigure "icons/photo.png";
-% 确定照片尺寸
-numeric f;
-f := (bbwidth photo) / (bbheight photo);
-photo := photo xysized (3.5cm, 3.5cm / f);
-% 裁剪为圆形区域
-path shape; color shapecolor;
-shape := unitcircle scaled 3.5cm;
-shapecolor := \MPcolor{\getvariable{photo}{shapecolor}};
-clip photo to shape;
-% 照片定位，需要试探几次，方能找到合适位置
-pair location;
-location := (\getvariable{photo}{x}, \getvariable{photo}{y});
-photo := photo shifted location;
-shape := shape shifted location;
-% 只在首页显示照片
-if \number\userpagenumber = 1:
-    draw photo;
-    draw shape withpen pencircle scaled 2pt withcolor shapecolor;
-fi;
-@
-
-经过一些试探，我将照片默认的位置定义为
-
-@ 简历样式 # +
-\setvariables[photo][x=16cm,y=24.25cm,shapecolor=CharmRed]
-@
-
 \section{模板}
 
 将前文所作样式汇总为模板文件，以名为 octcv.tex 的文件保存：
@@ -484,7 +498,7 @@ $ context foo.tex
 \cvstage{.3}{\tt 1167 \RightArrow\ 1170}{.3}{山东}{.2}{全真教}{.2}{教主}
 \startitemize
 \item 撰写《重阳立教十五论》；
-\item 收马丹阳、谭处端、刘处玄、丘处机、王处一、郝大通、孙不二为徒
+\item 收马丹阳、谭处端、刘处玄、丘处机、王处一、郝大通、孙不二为徒；
 \item 建立三教七宝会、金莲会、三光会、玉华会等。
 \stopitemize
 \stoptext
