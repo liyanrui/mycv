@@ -99,7 +99,7 @@ fi;
 将上述 \METAPOST\ 代码置于 \type{useMPgraphic} 环境，借助 overlay 机制可使之成为页面背景：
 
 \starttyping
-/BTEX\color[darkred]{@}/ETEX/BTEX\type[color=darkred]{ 简历页面背景 }/ETEX/BTEX\color[darkred]{\#}/ETEX/BTEX\reference[xi-7]{7}\inoutermargin{\darkred{7}}/ETEX
+/BTEX\color[darkred]{@}/ETEX/BTEX\type[color=darkred]{ 简历样式 }/ETEX/BTEX\color[darkred]{\#}/ETEX/BTEX\reference[xi-7]{7}\inoutermargin{\darkred{7}}/ETEX/BTEX\ \color[darkgreen]{\bf $+$}\ /ETEX
 \startuseMPgraphic{cvbackground}
 /BTEX\color[darkcyan]{\#}/ETEX/BTEX\type[color=darkcyan]{ 构造背景空间 }/ETEX/BTEX\color[darkcyan]{@}/ETEX/BTEX\ <\in[xi-3]>/ETEX
 /BTEX\color[darkcyan]{\#}/ETEX/BTEX\type[color=darkcyan]{ 画出版心顶线 }/ETEX/BTEX\color[darkcyan]{@}/ETEX/BTEX\ <\in[xi-4]>/ETEX
@@ -117,8 +117,7 @@ fi;
 \usemodule[zhfonts]
 \setuppapersize[A8][A8]
 /BTEX\color[darkcyan]{\#}/ETEX/BTEX\type[color=darkcyan]{ 简历参数 }/ETEX/BTEX\color[darkcyan]{@}/ETEX/BTEX\ <\in[xi-5]>/ETEX/BTEX\ <\in[xi-12]>/ETEX/BTEX\ <\in[xi-18]>/ETEX
-/BTEX\color[darkcyan]{\#}/ETEX/BTEX\type[color=darkcyan]{ 简历样式 }/ETEX/BTEX\color[darkcyan]{@}/ETEX/BTEX\ <\in[xi-1]>/ETEX/BTEX\ <\in[xi-2]>/ETEX/BTEX\ <\in[xi-11]>/ETEX/BTEX\ <\in[xi-20]>/ETEX/BTEX\ <\in[xi-22]>/ETEX/BTEX\ <\in[xi-27]>/ETEX/BTEX\ <\in[xi-28]>/ETEX/BTEX\ <\in[xi-29]>/ETEX/BTEX\ <\in[xi-31]>/ETEX/BTEX\ <\in[xi-32]>/ETEX/BTEX\ <\in[xi-33]>/ETEX
-/BTEX\color[darkcyan]{\#}/ETEX/BTEX\type[color=darkcyan]{ 简历页面背景 }/ETEX/BTEX\color[darkcyan]{@}/ETEX/BTEX\ <\in[xi-7]>/ETEX
+/BTEX\color[darkcyan]{\#}/ETEX/BTEX\type[color=darkcyan]{ 简历样式 }/ETEX/BTEX\color[darkcyan]{@}/ETEX/BTEX\ <\in[xi-1]>/ETEX/BTEX\ <\in[xi-2]>/ETEX/BTEX\ <\in[xi-7]>/ETEX/BTEX\ <\in[xi-11]>/ETEX/BTEX\ <\in[xi-13]>/ETEX/BTEX\ <\in[xi-14]>/ETEX/BTEX\ <\in[xi-17]>/ETEX/BTEX\ <\in[xi-20]>/ETEX/BTEX\ <\in[xi-22]>/ETEX/BTEX\ <\in[xi-27]>/ETEX/BTEX\ <\in[xi-28]>/ETEX/BTEX\ <\in[xi-29]>/ETEX/BTEX\ <\in[xi-31]>/ETEX/BTEX\ <\in[xi-32]>/ETEX/BTEX\ <\in[xi-33]>/ETEX
 \stoptyping
 
 首先，验证单页情况，结果见图 \in[bg-test] 左 1。为了表现出版心顶线和底线分别位于页眉和页脚的中部，在该示例中，开启了页面布局网格。
@@ -175,7 +174,7 @@ fi;
 主标题的样式只作上述设定之外。次级标题，我想增加两条底线作为装饰，同时也能让简历的各个区域的分野更为清晰。第一条底线需要与标题等长且为粗线，第二条底线横贯版心。这两条底线，使用 \METAPOST\ 很容易画出，前提是定义一个专用的盒子，用于排版标题内容，且基于 \CONTEXT\ 的 overlay 机制为其构造背景，而两条底线便是背景图形。首先，定义盒子并设定其样式：
 
 \starttyping
-/BTEX\color[darkred]{@}/ETEX/BTEX\type[color=darkred]{ 小节标题盒子 }/ETEX/BTEX\color[darkred]{\#}/ETEX/BTEX\reference[xi-13]{13}\inoutermargin{\darkred{13}}/ETEX
+/BTEX\color[darkred]{@}/ETEX/BTEX\type[color=darkred]{ 简历样式 }/ETEX/BTEX\color[darkred]{\#}/ETEX/BTEX\reference[xi-13]{13}\inoutermargin{\darkred{13}}/ETEX/BTEX\ \color[darkgreen]{\bf $+$}\ /ETEX
 \defineframed
   [cvframed]
   [width=\textwidth,frame=off,boffset=2pt,
@@ -185,7 +184,7 @@ fi;
 \noindent \type{BottomLines} 是 overlay 的名字，该 overlay 是同样名为 \type{BottomLines} 的 \METAPOST\ 图形：
 
 \starttyping
-/BTEX\color[darkred]{@}/ETEX/BTEX\type[color=darkred]{ 小节标题盒子 }/ETEX/BTEX\color[darkred]{\#}/ETEX/BTEX\reference[xi-14]{14}\inoutermargin{\darkred{14}}/ETEX/BTEX\ \color[darkgreen]{\bf $+$}\ /ETEX
+/BTEX\color[darkred]{@}/ETEX/BTEX\type[color=darkred]{ 简历样式 }/ETEX/BTEX\color[darkred]{\#}/ETEX/BTEX\reference[xi-14]{14}\inoutermargin{\darkred{14}}/ETEX/BTEX\ \color[darkgreen]{\bf $+$}\ /ETEX
 \defineoverlay[BottomLines][\useMPgraphic{BottomLines}]
 \stoptyping
 
@@ -218,7 +217,7 @@ draw (0, OverlayHeight - .5thi) withcolor background;
 于是，便可得到小节标题盒子的背景图形：
 
 \starttyping
-/BTEX\color[darkred]{@}/ETEX/BTEX\type[color=darkred]{ 小节标题盒子 }/ETEX/BTEX\color[darkred]{\#}/ETEX/BTEX\reference[xi-17]{17}\inoutermargin{\darkred{17}}/ETEX/BTEX\ \color[darkgreen]{\bf $+$}\ /ETEX
+/BTEX\color[darkred]{@}/ETEX/BTEX\type[color=darkred]{ 简历样式 }/ETEX/BTEX\color[darkred]{\#}/ETEX/BTEX\reference[xi-17]{17}\inoutermargin{\darkred{17}}/ETEX/BTEX\ \color[darkgreen]{\bf $+$}\ /ETEX
 \startuseMPgraphic{BottomLines}
 /BTEX\color[darkcyan]{\#}/ETEX/BTEX\type[color=darkcyan]{ 画出小节标题底线 }/ETEX/BTEX\color[darkcyan]{@}/ETEX/BTEX\ <\in[xi-15]>/ETEX/BTEX\ <\in[xi-16]>/ETEX
 \stopuseMPgraphic
@@ -262,8 +261,7 @@ draw (0, OverlayHeight - .5thi) withcolor background;
 /BTEX\color[darkred]{@}/ETEX/BTEX\type[color=darkred]{ 简历标题样式测试 }/ETEX/BTEX\color[darkred]{\#}/ETEX/BTEX\reference[xi-21]{21}\inoutermargin{\darkred{21}}/ETEX
 \usemodule[zhfonts]
 /BTEX\color[darkcyan]{\#}/ETEX/BTEX\type[color=darkcyan]{ 简历参数 }/ETEX/BTEX\color[darkcyan]{@}/ETEX/BTEX\ <\in[xi-5]>/ETEX/BTEX\ <\in[xi-12]>/ETEX/BTEX\ <\in[xi-18]>/ETEX
-/BTEX\color[darkcyan]{\#}/ETEX/BTEX\type[color=darkcyan]{ 简历样式 }/ETEX/BTEX\color[darkcyan]{@}/ETEX/BTEX\ <\in[xi-1]>/ETEX/BTEX\ <\in[xi-2]>/ETEX/BTEX\ <\in[xi-11]>/ETEX/BTEX\ <\in[xi-20]>/ETEX/BTEX\ <\in[xi-22]>/ETEX/BTEX\ <\in[xi-27]>/ETEX/BTEX\ <\in[xi-28]>/ETEX/BTEX\ <\in[xi-29]>/ETEX/BTEX\ <\in[xi-31]>/ETEX/BTEX\ <\in[xi-32]>/ETEX/BTEX\ <\in[xi-33]>/ETEX
-/BTEX\color[darkcyan]{\#}/ETEX/BTEX\type[color=darkcyan]{ 小节标题盒子 }/ETEX/BTEX\color[darkcyan]{@}/ETEX/BTEX\ <\in[xi-13]>/ETEX/BTEX\ <\in[xi-14]>/ETEX/BTEX\ <\in[xi-17]>/ETEX
+/BTEX\color[darkcyan]{\#}/ETEX/BTEX\type[color=darkcyan]{ 简历样式 }/ETEX/BTEX\color[darkcyan]{@}/ETEX/BTEX\ <\in[xi-1]>/ETEX/BTEX\ <\in[xi-2]>/ETEX/BTEX\ <\in[xi-7]>/ETEX/BTEX\ <\in[xi-11]>/ETEX/BTEX\ <\in[xi-13]>/ETEX/BTEX\ <\in[xi-14]>/ETEX/BTEX\ <\in[xi-17]>/ETEX/BTEX\ <\in[xi-20]>/ETEX/BTEX\ <\in[xi-22]>/ETEX/BTEX\ <\in[xi-27]>/ETEX/BTEX\ <\in[xi-28]>/ETEX/BTEX\ <\in[xi-29]>/ETEX/BTEX\ <\in[xi-31]>/ETEX/BTEX\ <\in[xi-32]>/ETEX/BTEX\ <\in[xi-33]>/ETEX
 \startTEXpage[width=10cm,offset=5mm]
 \title{某某人}
 ... ... ...
@@ -315,7 +313,7 @@ draw (0, OverlayHeight - .5thi) withcolor background;
 /BTEX\color[darkred]{@}/ETEX/BTEX\type[color=darkred]{ 个人信息排版测试 }/ETEX/BTEX\color[darkred]{\#}/ETEX/BTEX\reference[xi-24]{24}\inoutermargin{\darkred{24}}/ETEX
 \usemodule[zhfonts]
 /BTEX\color[darkcyan]{\#}/ETEX/BTEX\type[color=darkcyan]{ 简历参数 }/ETEX/BTEX\color[darkcyan]{@}/ETEX/BTEX\ <\in[xi-5]>/ETEX/BTEX\ <\in[xi-12]>/ETEX/BTEX\ <\in[xi-18]>/ETEX
-/BTEX\color[darkcyan]{\#}/ETEX/BTEX\type[color=darkcyan]{ 简历样式 }/ETEX/BTEX\color[darkcyan]{@}/ETEX/BTEX\ <\in[xi-1]>/ETEX/BTEX\ <\in[xi-2]>/ETEX/BTEX\ <\in[xi-11]>/ETEX/BTEX\ <\in[xi-20]>/ETEX/BTEX\ <\in[xi-22]>/ETEX/BTEX\ <\in[xi-27]>/ETEX/BTEX\ <\in[xi-28]>/ETEX/BTEX\ <\in[xi-29]>/ETEX/BTEX\ <\in[xi-31]>/ETEX/BTEX\ <\in[xi-32]>/ETEX/BTEX\ <\in[xi-33]>/ETEX
+/BTEX\color[darkcyan]{\#}/ETEX/BTEX\type[color=darkcyan]{ 简历样式 }/ETEX/BTEX\color[darkcyan]{@}/ETEX/BTEX\ <\in[xi-1]>/ETEX/BTEX\ <\in[xi-2]>/ETEX/BTEX\ <\in[xi-7]>/ETEX/BTEX\ <\in[xi-11]>/ETEX/BTEX\ <\in[xi-13]>/ETEX/BTEX\ <\in[xi-14]>/ETEX/BTEX\ <\in[xi-17]>/ETEX/BTEX\ <\in[xi-20]>/ETEX/BTEX\ <\in[xi-22]>/ETEX/BTEX\ <\in[xi-27]>/ETEX/BTEX\ <\in[xi-28]>/ETEX/BTEX\ <\in[xi-29]>/ETEX/BTEX\ <\in[xi-31]>/ETEX/BTEX\ <\in[xi-32]>/ETEX/BTEX\ <\in[xi-33]>/ETEX
 \startTEXpage[width=17cm,frame=on,offset=5mm]
 \title{王重阳}
 {\bf 一住行窝几十年，蓬头长日走如颠。海棠亭下重阳子，莲叶舟中太乙仙。\\
@@ -416,7 +414,7 @@ drawarrow (0, 0) -- (5mm, 0) withpen pencircle;
 /BTEX\color[darkred]{@}/ETEX/BTEX\type[color=darkred]{ 测试时间节点 }/ETEX/BTEX\color[darkred]{\#}/ETEX/BTEX\reference[xi-30]{30}\inoutermargin{\darkred{30}}/ETEX
 \usemodule[zhfonts]
 /BTEX\color[darkcyan]{\#}/ETEX/BTEX\type[color=darkcyan]{ 简历参数 }/ETEX/BTEX\color[darkcyan]{@}/ETEX/BTEX\ <\in[xi-5]>/ETEX/BTEX\ <\in[xi-12]>/ETEX/BTEX\ <\in[xi-18]>/ETEX
-/BTEX\color[darkcyan]{\#}/ETEX/BTEX\type[color=darkcyan]{ 简历样式 }/ETEX/BTEX\color[darkcyan]{@}/ETEX/BTEX\ <\in[xi-1]>/ETEX/BTEX\ <\in[xi-2]>/ETEX/BTEX\ <\in[xi-11]>/ETEX/BTEX\ <\in[xi-20]>/ETEX/BTEX\ <\in[xi-22]>/ETEX/BTEX\ <\in[xi-27]>/ETEX/BTEX\ <\in[xi-28]>/ETEX/BTEX\ <\in[xi-29]>/ETEX/BTEX\ <\in[xi-31]>/ETEX/BTEX\ <\in[xi-32]>/ETEX/BTEX\ <\in[xi-33]>/ETEX
+/BTEX\color[darkcyan]{\#}/ETEX/BTEX\type[color=darkcyan]{ 简历样式 }/ETEX/BTEX\color[darkcyan]{@}/ETEX/BTEX\ <\in[xi-1]>/ETEX/BTEX\ <\in[xi-2]>/ETEX/BTEX\ <\in[xi-7]>/ETEX/BTEX\ <\in[xi-11]>/ETEX/BTEX\ <\in[xi-13]>/ETEX/BTEX\ <\in[xi-14]>/ETEX/BTEX\ <\in[xi-17]>/ETEX/BTEX\ <\in[xi-20]>/ETEX/BTEX\ <\in[xi-22]>/ETEX/BTEX\ <\in[xi-27]>/ETEX/BTEX\ <\in[xi-28]>/ETEX/BTEX\ <\in[xi-29]>/ETEX/BTEX\ <\in[xi-31]>/ETEX/BTEX\ <\in[xi-32]>/ETEX/BTEX\ <\in[xi-33]>/ETEX
 \startTEXpage[width=fit]
 \cvstage{.3}{\bf 某年某月 \RightArrow\ 某年某月}{.2}{\bf 全真教}{.1}{\bf 掌教}{.2}{\bf 创作全真剑法}
 \stopTEXpage
@@ -465,7 +463,7 @@ fill p withcolor squarecolor;
 \usemodule[zhfonts]
 /BTEX\color[darkcyan]{\#}/ETEX/BTEX\type[color=darkcyan]{ 简历参数 }/ETEX/BTEX\color[darkcyan]{@}/ETEX/BTEX\ <\in[xi-5]>/ETEX/BTEX\ <\in[xi-12]>/ETEX/BTEX\ <\in[xi-18]>/ETEX
 \startTEXpage[width=8cm]
-/BTEX\color[darkcyan]{\#}/ETEX/BTEX\type[color=darkcyan]{ 简历样式 }/ETEX/BTEX\color[darkcyan]{@}/ETEX/BTEX\ <\in[xi-1]>/ETEX/BTEX\ <\in[xi-2]>/ETEX/BTEX\ <\in[xi-11]>/ETEX/BTEX\ <\in[xi-20]>/ETEX/BTEX\ <\in[xi-22]>/ETEX/BTEX\ <\in[xi-27]>/ETEX/BTEX\ <\in[xi-28]>/ETEX/BTEX\ <\in[xi-29]>/ETEX/BTEX\ <\in[xi-31]>/ETEX/BTEX\ <\in[xi-32]>/ETEX/BTEX\ <\in[xi-33]>/ETEX
+/BTEX\color[darkcyan]{\#}/ETEX/BTEX\type[color=darkcyan]{ 简历样式 }/ETEX/BTEX\color[darkcyan]{@}/ETEX/BTEX\ <\in[xi-1]>/ETEX/BTEX\ <\in[xi-2]>/ETEX/BTEX\ <\in[xi-7]>/ETEX/BTEX\ <\in[xi-11]>/ETEX/BTEX\ <\in[xi-13]>/ETEX/BTEX\ <\in[xi-14]>/ETEX/BTEX\ <\in[xi-17]>/ETEX/BTEX\ <\in[xi-20]>/ETEX/BTEX\ <\in[xi-22]>/ETEX/BTEX\ <\in[xi-27]>/ETEX/BTEX\ <\in[xi-28]>/ETEX/BTEX\ <\in[xi-29]>/ETEX/BTEX\ <\in[xi-31]>/ETEX/BTEX\ <\in[xi-32]>/ETEX/BTEX\ <\in[xi-33]>/ETEX
 ... ... 段落内容 ... ...
 \startitemize
 \item 列表项 1 ... ...
@@ -484,9 +482,7 @@ fill p withcolor squarecolor;
 \startenvironment octcv
 \usemodule[zhfonts]
 /BTEX\color[darkcyan]{\#}/ETEX/BTEX\type[color=darkcyan]{ 简历参数 }/ETEX/BTEX\color[darkcyan]{@}/ETEX/BTEX\ <\in[xi-5]>/ETEX/BTEX\ <\in[xi-12]>/ETEX/BTEX\ <\in[xi-18]>/ETEX
-/BTEX\color[darkcyan]{\#}/ETEX/BTEX\type[color=darkcyan]{ 简历样式 }/ETEX/BTEX\color[darkcyan]{@}/ETEX/BTEX\ <\in[xi-1]>/ETEX/BTEX\ <\in[xi-2]>/ETEX/BTEX\ <\in[xi-11]>/ETEX/BTEX\ <\in[xi-20]>/ETEX/BTEX\ <\in[xi-22]>/ETEX/BTEX\ <\in[xi-27]>/ETEX/BTEX\ <\in[xi-28]>/ETEX/BTEX\ <\in[xi-29]>/ETEX/BTEX\ <\in[xi-31]>/ETEX/BTEX\ <\in[xi-32]>/ETEX/BTEX\ <\in[xi-33]>/ETEX
-/BTEX\color[darkcyan]{\#}/ETEX/BTEX\type[color=darkcyan]{ 简历页面背景 }/ETEX/BTEX\color[darkcyan]{@}/ETEX/BTEX\ <\in[xi-7]>/ETEX
-/BTEX\color[darkcyan]{\#}/ETEX/BTEX\type[color=darkcyan]{ 小节标题盒子 }/ETEX/BTEX\color[darkcyan]{@}/ETEX/BTEX\ <\in[xi-13]>/ETEX/BTEX\ <\in[xi-14]>/ETEX/BTEX\ <\in[xi-17]>/ETEX
+/BTEX\color[darkcyan]{\#}/ETEX/BTEX\type[color=darkcyan]{ 简历样式 }/ETEX/BTEX\color[darkcyan]{@}/ETEX/BTEX\ <\in[xi-1]>/ETEX/BTEX\ <\in[xi-2]>/ETEX/BTEX\ <\in[xi-7]>/ETEX/BTEX\ <\in[xi-11]>/ETEX/BTEX\ <\in[xi-13]>/ETEX/BTEX\ <\in[xi-14]>/ETEX/BTEX\ <\in[xi-17]>/ETEX/BTEX\ <\in[xi-20]>/ETEX/BTEX\ <\in[xi-22]>/ETEX/BTEX\ <\in[xi-27]>/ETEX/BTEX\ <\in[xi-28]>/ETEX/BTEX\ <\in[xi-29]>/ETEX/BTEX\ <\in[xi-31]>/ETEX/BTEX\ <\in[xi-32]>/ETEX/BTEX\ <\in[xi-33]>/ETEX
 \stopenvironment
 \stoptyping
 

@@ -92,7 +92,7 @@ fi;
 
 将上述 \METAPOST\ 代码置于 \type{useMPgraphic} 环境，借助 overlay 机制可使之成为页面背景：
 
-@ 简历页面背景 #
+@ 简历样式 # +
 \startuseMPgraphic{cvbackground}
 # 构造背景空间 @
 # 画出版心顶线 @
@@ -110,7 +110,6 @@ fi;
 \setuppapersize[A8][A8]
 # 简历参数 @
 # 简历样式 @
-# 简历页面背景 @
 @
 
 首先，验证单页情况，结果见图 \in[bg-test] 左 1。为了表现出版心顶线和底线分别位于页眉和页脚的中部，在该示例中，开启了页面布局网格。
@@ -162,7 +161,7 @@ fi;
 
 主标题的样式只作上述设定之外。次级标题，我想增加两条底线作为装饰，同时也能让简历的各个区域的分野更为清晰。第一条底线需要与标题等长且为粗线，第二条底线横贯版心。这两条底线，使用 \METAPOST\ 很容易画出，前提是定义一个专用的盒子，用于排版标题内容，且基于 \CONTEXT\ 的 overlay 机制为其构造背景，而两条底线便是背景图形。首先，定义盒子并设定其样式：
 
-@ 小节标题盒子 #
+@ 简历样式 # +
 \defineframed
   [cvframed]
   [width=\textwidth,frame=off,boffset=2pt,
@@ -171,7 +170,7 @@ fi;
 
 \noindent \type{BottomLines} 是 overlay 的名字，该 overlay 是同样名为 \type{BottomLines} 的 \METAPOST\ 图形：
 
-@ 小节标题盒子 # +
+@ 简历样式 # +
 \defineoverlay[BottomLines][\useMPgraphic{BottomLines}]
 @
 
@@ -201,7 +200,7 @@ draw (0, OverlayHeight - .5thi) withcolor background;
 
 于是，便可得到小节标题盒子的背景图形：
 
-@ 小节标题盒子 # +
+@ 简历样式 # +
 \startuseMPgraphic{BottomLines}
 # 画出小节标题底线 @
 \stopuseMPgraphic
@@ -242,7 +241,6 @@ draw (0, OverlayHeight - .5thi) withcolor background;
 \usemodule[zhfonts]
 # 简历参数 @
 # 简历样式 @
-# 小节标题盒子 @
 \startTEXpage[width=10cm,offset=5mm]
 \title{某某人}
 ... ... ...
@@ -450,8 +448,6 @@ fill p withcolor squarecolor;
 \usemodule[zhfonts]
 # 简历参数 @
 # 简历样式 @
-# 简历页面背景 @
-# 小节标题盒子 @
 \stopenvironment
 @
 
